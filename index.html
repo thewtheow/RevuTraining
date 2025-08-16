@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Company Profile</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .error-message {
+        color: red;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+
+      .form-output {
+        float: right;
+        margin-left: 20px;
+        width: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Company Profile</h1>
+      <img src="revoU.png" alt="revoU Logo" class="logo" />
+      <div class="nav-bar">
+        <div class="nav-item">Home</div>
+        <div class="nav-item">Profile</div>
+        <div class="nav-item">Portfolio</div>
+        <div class="nav-item">Message Us</div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <h3>Hi, <span id="nama"></span>, welcome to the website!</h3>
+    </main>
+    <script>
+      var name = prompt("Masukkan nama Anda");
+      document.getElementById("nama").innerText = name;
+    </script>
+
+    <div id="headquarters-section">
+      <h1>Headquarters</h1>
+      <div class="wrapper">
+        <div class="headquarters-image-container">
+          <div class="headquarters-image"></div>
+          <img src="jakarta.jpeg" alt="Jakarta" class="headquarters-image" />
+          <p>Jakarta</p>
+        </div>
+        <div class="headquarters-image-container">
+          <div class="headquarters-image"></div>
+          <img src="bandung.jpeg" alt="Jakarta" class="headquarters-image" />
+          <p>Bandung</p>
+        </div>
+        <div class="headquarters-image-container">
+          <div class="headquarters-image"></div>
+          <img src="surabaya.jpeg" alt="Jakarta" class="headquarters-image" />
+          <p>Surabaya</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="message-us-section" class="message-us">
+      <h1>Message Us</h1>
+      <form onsubmit="return validateForm()">
+        <table>
+          <tr>
+            <td>Nama</td>
+            <td>:</td>
+            <td>
+              <input
+                id="input-nama"
+                type="text"
+                name="nama"
+                placeholder="Tulis nama Anda di sini"
+              />
+            </td>
+            <td id="nama-error" class="error-message"></td>
+          </tr>
+          <tr>
+            <td>Tanggal Lahir</td>
+            <td>:</td>
+            <td>
+              <input
+                id="input-tanggal-lahir"
+                type="date"
+                name="tanggal-lahir"
+              />
+            </td>
+            <td id="tanggal-lahir-error" class="error-message"></td>
+          </tr>
+          <tr>
+            <td>Jenis Kelamin</td>
+            <td>:</td>
+            <td>
+              <input
+                id="input-jk-laki"
+                type="radio"
+                name="jk"
+                value="laki-laki"
+                checked
+              />
+              Laki - Laki
+            </td>
+            <td>
+              <input
+                id="input-jk-perempuan"
+                type="radio"
+                name="jk"
+                value="perempuan"
+              />
+              Perempuan
+            </td>
+            <td id="jk-error" class="error-message"></td>
+          </tr>
+          <tr>
+            <td>Pesan</td>
+            <td>:</td>
+            <td>
+              <textarea
+                id="input-pesan"
+                rows="2"
+                cols="25"
+                placeholder="Tulis Pesan Anda di sini"
+              ></textarea>
+            </td>
+            <td id="pesan-error" class="error-message"></td>
+          </tr>
+        </table>
+        <input type="submit" value="Submit" />
+      </form>
+      <div class="form-output" style="display: none">
+        <h2>Form Output</h2>
+        <div>
+          <label>Nama:</label>
+          <span id="sender-full-name"></span>
+        </div>
+        <div>
+          <label>Tanggal Lahir:</label>
+          <span id="sender-tanggal-lahir"></span>
+        </div>
+        <div>
+          <label>Jenis Kelamin:</label>
+          <span id="sender-jenis-kelamin"></span>
+        </div>
+        <div>
+          <label>Pesan:</label>
+          <span id="sender-pesan"></span>
+        </div>
+      </div>
+      <script>
+        function validateForm() {
+          var nama = document.getElementById("input-nama").value;
+          var tanggalLahir = document.getElementById(
+            "input-tanggal-lahir"
+          ).value;
+          var jenisKelaminLaki =
+            document.getElementById("input-jk-laki").checked;
+          var jenisKelaminPerempuan =
+            document.getElementById("input-jk-perempuan").checked;
+          var pesan = document.getElementById("input-pesan").value;
+
+          var namaError = document.getElementById("nama-error");
+          var tanggalLahirError = document.getElementById(
+            "tanggal-lahir-error"
+          );
+          var jkError = document.getElementById("jk-error");
+          var pesanError = document.getElementById("pesan-error");
+
+          namaError.innerText = "";
+          tanggalLahirError.innerText = "";
+          jkError.innerText = "";
+          pesanError.innerText = "";
+
+          if (nama.trim() === "") {
+            namaError.innerText = "Nama tidak boleh kosong";
+            return false;
+          }
+
+          if (tanggalLahir === "") {
+            tanggalLahirError.innerText = "Tanggal lahir tidak boleh kosong";
+            return false;
+          }
+
+          if (!jenisKelaminLaki && !jenisKelaminPerempuan) {
+            jkError.innerText = "Jenis kelamin harus dipilih";
+            return false;
+          }
+
+          if (pesan.trim() === "") {
+            pesanError.innerText = "Pesan tidak boleh kosong";
+            return false;
+          }
+
+          var formOutput = document.querySelector(".form-output");
+          var senderFullName = document.getElementById("sender-full-name");
+          var senderTanggalLahir = document.getElementById(
+            "sender-tanggal-lahir"
+          );
+          var senderJenisKelamin = document.getElementById(
+            "sender-jenis-kelamin"
+          );
+          var senderPesan = document.getElementById("sender-pesan");
+
+          senderFullName.innerText = nama;
+          senderTanggalLahir.innerText = tanggalLahir;
+          senderJenisKelamin.innerText = jenisKelaminLaki
+            ? "Laki - Laki"
+            : "Perempuan";
+          senderPesan.innerText = pesan;
+
+          formOutput.style.display = "block";
+
+          return false;
+        }
+      </script>
+    </div>
+
+    <footer>Created By Vinz</footer>
+  </body>
+</html>
